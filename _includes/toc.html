@@ -1,9 +1,13 @@
-<div id="toc">
-  <div class="toc-title">
-    <i class="material-icons mat-icon">toc</i><span>In this post</span>
-  </div>
-  <div id="full" markdown="1">
-  *  Auto generated table of contents
-  {:toc}
-  </div>
-</div>
+{% assign enable_toc = false %}
+{% if site.toc and page.toc %}
+  {% if page.content contains '<h2' or page.content contains '<h3' %}
+    {% assign enable_toc = true %}
+  {% endif %}
+{% endif %}
+
+{% if enable_toc %}
+  <section id="toc-wrapper" class="ps-0 pe-4">
+    <h2 class="panel-heading ps-3 pt-2 mb-2">{{- site.data.locales[include.lang].panel.toc -}}</h2>
+    <nav id="toc"></nav>
+  </section>
+{% endif %}
